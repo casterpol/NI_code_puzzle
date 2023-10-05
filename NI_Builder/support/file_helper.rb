@@ -22,9 +22,7 @@ module File_helper
 
   def self.transform_object_to_array(data:)
     string_arr = []
-    data.each do |object|
-      string_arr << object.convert_to_arr
-    end
+    data.map { |person| string_arr << person.convert_to_arr}
     string_arr
   end
 end

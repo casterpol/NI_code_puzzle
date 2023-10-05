@@ -69,21 +69,15 @@ module NationalInsurance
 
   def self.count_ni_country_of_births(ni_list:)
     countries_arr = []
-    ni_list.each do |object|
-      countries_arr << object.country_of_birth
-    end
+    ni_list.map { |person| countries_arr << person.country_of_birth }
 
     results = {}
-    NI_Constants.countries_to_count.each do |country|
-      results[country] = countries_arr.count(country)
-    end
+    NI_Constants.countries_to_count.map { |country| results[country] = countries_arr.count(country) }
 
     results['Other'] = countries_arr.count - results.values.sum
 
     puts ("Total number of records counted: #{countries_arr.count}\nTotal Count for each country is as follows:").colorize(:green)
 
-    results.each do |key, value|
-      puts ("#{key}: #{value}").colorize(:blue)
-    end
+    results.map { |country, total|  puts ("#{country}: #{total}").colorize(:blue)}
   end
 end
