@@ -12,7 +12,7 @@ csv file which includes national insurance numbers. high level country of birth 
 #### data
 * data_set.csv = (main data set)
 * file_constants.rb = hardcoded headers for output csv file
-* ni_constants.rb = constants relating to forming and counting the ni number. changes here can quickly adapt the ni number
+* ni_constants.rb = constants relating to ni number
 
 
 #### support
@@ -30,6 +30,7 @@ bundle install
 
 #### Run options
 I have left 3 lines at the bottom of ni_builder.rb (2 commented out), these method calls are examples of how to run the code.
+Optional_space is a flag that takes in true / false, it defaults as false if not passed in.
 if you are using an ide such as rubymine, you can press play on the current file, alternatively you can run the file with the terminal command below:
 ```
 ruby ni_builder.rb

@@ -18,7 +18,6 @@ module File_helper
     else
       puts ("File: #{save_file_name} has been saved in Results directory").colorize(:green)
     end
-
   end
 
   def self.transform_object_to_array(data:)
@@ -28,5 +27,4 @@ module File_helper
     end
     string_arr
   end
-
 end

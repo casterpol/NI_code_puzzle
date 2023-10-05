@@ -7,4 +7,15 @@ module NI_Constants
     ['Wales', 'England', 'Scotland', 'Northern Ireland']
   end
 
+  def self.other_country_letter
+    %w(O)
+  end
+  def self.repeat_time_out
+    10
+  end
+
+  def self.year_format
+    '%y'
+  end
+
 end
