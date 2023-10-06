@@ -42,11 +42,11 @@ module NationalInsurance
     end
   end
 
-  def self.add_unique_ni(list:, optional_space:)
-    unique_ni_list = []
+  def self.add_unique_ni(data:, optional_space:)
+    updated_data = []
     check_ni_for_duplicates = Set.new
 
-    list.each do |row|
+    data.each do |row|
       person = Person.new(person: row)
       person.generate_ni_number(optional_space: optional_space)
 
@@ -61,15 +61,15 @@ module NationalInsurance
       end
 
       check_ni_for_duplicates << person.ni_number
-      unique_ni_list << person
+      updated_data << person
     end
 
-    unique_ni_list
+    updated_data
   end
 
-  def self.count_ni_countries_of_birth(ni_list:)
+  def self.count_ni_countries_of_birth(data:)
     countries_arr = []
-    ni_list.map { |person| countries_arr << person.country_of_birth }
+    data.map { |person| countries_arr << person.country_of_birth }
 
     results = {}
     NiConstants.countries_to_count.map { |country| results[country] = countries_arr.count(country) }
