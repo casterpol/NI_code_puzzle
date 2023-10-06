@@ -1,4 +1,4 @@
-module File_constants
+module FileConstants
   def self.file_headers
     ['First names',
      'Last name',

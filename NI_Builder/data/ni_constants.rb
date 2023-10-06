@@ -1,4 +1,4 @@
-module NI_Constants
+module NiConstants
   def self.number_of_random_digits
     4
   end

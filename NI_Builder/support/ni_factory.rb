@@ -7,7 +7,7 @@ module NationalInsurance
      space,
      year_of_birth(dob: person.date_of_birth),
      space,
-     random_code_integer(number_of_digits: NI_Constants.number_of_random_digits),
+     random_code_integer(number_of_digits: NiConstants.number_of_random_digits),
      space,
      country_of_birth(country: person.country_of_birth)].join
   end
@@ -27,7 +27,7 @@ module NationalInsurance
   end
 
   def self.year_of_birth(dob:)
-    Date.parse(dob).strftime(NI_Constants.year_format)
+    Date.parse(dob).strftime(NiConstants.year_format)
   end
 
   def self.random_code_integer(number_of_digits:)
@@ -35,10 +35,10 @@ module NationalInsurance
   end
 
   def self.country_of_birth(country:)
-    if NI_Constants.countries_to_count.include? country
+    if NiConstants.countries_to_count.include? country
       country.chars.first.upcase
     else
-      NI_Constants.other_country_letter
+      NiConstants.other_country_letter
     end
   end
 
@@ -52,7 +52,7 @@ module NationalInsurance
 
       while check_ni_for_duplicates.include?(person.ni_number)
         repeat_counter ||= 0
-        if repeat_counter < NI_Constants.repeat_time_out
+        if repeat_counter < NiConstants.repeat_time_out
           person.generate_ni_number(optional_space: optional_space)
           repeat_counter += 1
         else
@@ -67,12 +67,12 @@ module NationalInsurance
     unique_ni_list
   end
 
-  def self.count_ni_country_of_births(ni_list:)
+  def self.count_ni_countries_of_birth(ni_list:)
     countries_arr = []
     ni_list.map { |person| countries_arr << person.country_of_birth }
 
     results = {}
-    NI_Constants.countries_to_count.map { |country| results[country] = countries_arr.count(country) }
+    NiConstants.countries_to_count.map { |country| results[country] = countries_arr.count(country) }
 
     results['Other'] = countries_arr.count - results.values.sum
 

@@ -1,16 +1,16 @@
-module File_helper
+module FileHelper
   def self.read_csv(file_name:)
     begin
       CSV.parse(File.read(file_name), headers: true).map(&:to_h)
     rescue Errno::ENOENT => e
-      raise ("Unable to find csv file to load:\n#{e}").colorize(:color => :red, :mode => :bold)
+      raise ("Unable to find csv file to load: #{file_name.colorize(:color => :red, :mode => :bold)}\nError:#{e}")
     end
   end
 
   def self.save_to_csv(save_file_name:, data:)
     string_arr = transform_object_to_array(data: data)
     begin
-      CSV.open("Results/#{save_file_name}.csv", 'w', write_headers: true, headers: File_constants.file_headers) do |line|
+      CSV.open("Results/#{save_file_name}.csv", 'w', write_headers: true, headers: FileConstants.file_headers) do |line|
         string_arr.each { |person| line << person }
       end
     rescue Errno::ENOENT => e
