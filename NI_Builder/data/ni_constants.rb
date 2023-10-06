@@ -17,5 +17,4 @@ module NI_Constants
   def self.year_format
     '%y'
   end
-
 end
