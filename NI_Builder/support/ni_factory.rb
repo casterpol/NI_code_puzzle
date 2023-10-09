@@ -13,9 +13,7 @@ module NationalInsurance
   end
 
   def self.first_name_initial(name:)
-    # remove trailing full stop if present
-    name.delete_suffix!(".")
-    if name.include?(".")
+    if name.include?(". ")
       name.sub(/^\w*\.\s/, '').chars.first.upcase
     else
       name.chars.first.upcase
@@ -47,21 +45,27 @@ module NationalInsurance
     check_ni_for_duplicates = Set.new
 
     data.each do |row|
+      unique = true
+      repeat_counter = 0
       person = Person.new(person: row)
       person.generate_ni_number(optional_space: optional_space)
 
       while check_ni_for_duplicates.include?(person.ni_number)
-        repeat_counter ||= 0
         if repeat_counter < NiConstants.repeat_time_out
           person.generate_ni_number(optional_space: optional_space)
           repeat_counter += 1
         else
-          raise ("unable to create unique ni for: #{person.first_names person.last_name}").colorize(:color => :red, :mode => :bold)
+          unique = false
+          break
         end
       end
 
-      check_ni_for_duplicates << person.ni_number
-      updated_data << person
+      if unique
+        check_ni_for_duplicates << person.ni_number
+        updated_data << person
+      else
+        puts ("unable to create unique ni for: #{person.first_names} #{person.last_name}").colorize(:color => :red, :mode => :bold)
+      end
     end
 
     updated_data

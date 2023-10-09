@@ -1,6 +1,6 @@
 # NI_code_puzzle
 
-### Abbrieviations:
+### Abbreviation:
 Throughout the project, I have used "ni" instead of "National Insurance"
 
 
