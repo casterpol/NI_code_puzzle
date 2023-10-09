@@ -16,14 +16,7 @@ class Person
     @ni_number = NationalInsurance.build(person: self, optional_space: optional_space)
   end
 
-  def convert_to_arr
-    [first_names,
-     last_name,
-     address,
-     hobby,
-     date_of_birth,
-     country_of_birth,
-     favourite_food,
-     ni_number]
+  def convert_to_string_arr
+    self.instance_variables.map{ |attribute| self.instance_variable_get(attribute).to_s }
   end
 end

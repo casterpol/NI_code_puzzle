@@ -22,7 +22,7 @@ module FileHelper
 
   def self.transform_object_to_array(data:)
     string_arr = []
-    data.map { |person| string_arr << person.convert_to_arr}
+    data.map { |person| string_arr << person.convert_to_string_arr}
     string_arr
   end
 end
